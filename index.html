@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Gravity Courier</title>
+  <script src="https://accounts.google.com/gsi/client" async></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #000011; overflow: hidden; }
+    #game-container { width: 100vw; height: 100vh; }
+
+    #auth-overlay {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 17, 0.96);
+      z-index: 100;
+      gap: 20px;
+      font-family: monospace;
+    }
+    #auth-overlay.hidden { display: none; }
+    #auth-overlay .ao-title {
+      font-size: clamp(36px, 10vw, 72px);
+      color: #00ffff;
+      text-shadow: 0 0 24px #00ffff88;
+      letter-spacing: 6px;
+    }
+    #auth-overlay .ao-subtitle {
+      font-size: clamp(14px, 3vw, 20px);
+      color: #ff6600;
+      letter-spacing: 3px;
+    }
+    #auth-overlay .ao-divider {
+      width: clamp(180px, 40vw, 320px);
+      height: 1px;
+      background: linear-gradient(to right, transparent, #334466, transparent);
+      margin: 8px 0;
+    }
+    #auth-overlay .ao-prompt {
+      font-size: clamp(11px, 2vw, 14px);
+      color: #8899bb;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    #auth-overlay .ao-separator {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: clamp(180px, 40vw, 320px);
+    }
+    #auth-overlay .ao-separator span {
+      font-size: 11px;
+      color: #334466;
+      letter-spacing: 2px;
+      white-space: nowrap;
+    }
+    #auth-overlay .ao-separator::before,
+    #auth-overlay .ao-separator::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #223344;
+    }
+    #auth-overlay .ao-guest-btn {
+      width: clamp(180px, 40vw, 280px);
+      padding: 11px 0;
+      background: transparent;
+      border: 1px solid #334466;
+      color: #8899bb;
+      font-family: monospace;
+      font-size: clamp(12px, 2.5vw, 14px);
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    #auth-overlay .ao-guest-btn:hover {
+      border-color: #8899bb;
+      color: #ffffff;
+    }
+    #auth-overlay .ao-error {
+      font-size: 12px;
+      color: #ff4444;
+      display: none;
+    }
+    #auth-overlay .ao-error.visible { display: block; }
+  </style>
+</head>
+<body>
+  <div id="auth-overlay" class="hidden">
+    <div class="ao-title">GRAVITY</div>
+    <div class="ao-subtitle">COURIER</div>
+    <div class="ao-divider"></div>
+    <div class="ao-prompt">SIGN IN TO START YOUR MISSION</div>
+    <div id="google-signin-btn"></div>
+    <div class="ao-separator"><span>OR</span></div>
+    <button class="ao-guest-btn" id="guest-btn">[ CONTINUE AS GUEST ]</button>
+    <div class="ao-error" id="auth-error">Authentication failed. Please try again.</div>
+  </div>
+
+  <div id="game-container"></div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
